@@ -2,9 +2,10 @@
 ## [04월 27일]
 > 오늘 배운 내용 요약
 ##### 타이머함수
-setTimeout(function() { <br>
+setTimeout(function() {
     clearInterval(foo); <br>
-},3000);
+},3000); <br>
+
 setTimeout(함수,시간) 특정 시간 후에 함수를 실행 <br>
 setInterval(함수,시간) 특정 시간마다 함수를 실행
 - ex)
