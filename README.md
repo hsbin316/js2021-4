@@ -1,12 +1,12 @@
 # 허성빈 [201840235]
-## [04월 06일]
+## [05월 04일]
 > 오늘 배운 내용 요약
 ##### 생성자 함수
  - 생성자 함수는 일반적인 함수와 구분할 수 있게 대문자로 시작하는 이름을 사용한다.
  - 생성자 함수 ex)
-   > function Product(name,price) {
-this.name=name;
-this.price=price;
+   > function Product(name,price) {<br>
+this.name=name;<br>
+this.price=price;<br>
 }
  - 객체 생성 ex)
    > let product = new Product("바나나",1200);
@@ -30,49 +30,49 @@ this.price=price;
 
 ##### Number객체
  - Number객체 생성 ex)
-   > let numberFromLiteral = 273;
+   > let numberFromLiteral = 273;<br>
    let numberFromConstrctor = new Number(273);
 
 ##### Number메소드
  - Number 객체의 메소드
-   > toExponential() 숫자를 자수 표시로 나타낸 문자열을 리턴합니다.
-   toFixed() 숫자를 고정소수점 표시로 나타낸 문자열을 리턴합니다.
+   > toExponential() 숫자를 자수 표시로 나타낸 문자열을 리턴합니다.<br>
+   toFixed() 숫자를 고정소수점 표시로 나타낸 문자열을 리턴합니다.<br>
    toPrecision() 숫자를 길이에 따라 자수 표시 또는 고정소수점 표시로 나타낸 문자열을 리턴합니다.
 
 ##### 생성자 함수의 속성
  - 객체의 일종이므로 속성과 메소드를 추가할 수 있다.
  - Number 생성자 함수의 속성
-   > MAX_VALUE 자바스크립트의 숫자가 나타낼 수 있는 최대 숫자
-   MIN_VALUE 자바스크립트의 숫자가 나타낼 수 있는 최소 숫자
-   NaN 자바스크립트의 숫자로 나타낼 수 없는 숫자
-   POSITIVE_INFINITY 양의 무한대 숫자
+   > MAX_VALUE 자바스크립트의 숫자가 나타낼 수 있는 최대 숫자<br>
+   MIN_VALUE 자바스크립트의 숫자가 나타낼 수 있는 최소 숫자<br>
+   NaN 자바스크립트의 숫자로 나타낼 수 없는 숫자<br>
+   POSITIVE_INFINITY 양의 무한대 숫자<br>
    NEGATIVE_INFINITY 음의 무한대 숫자
 
 ##### String 객체
  - 자바스크립트에서 가장 많이 사용하는 내장 객체
  - String 객체 생성 ex)
-   >let stingFromLiteral='안녕하세요';
+   >let stingFromLiteral='안녕하세요';<br>
    let stringFromConstructor=new String('안녕하세요');
 
 ##### String 속성과 메소드
  - String 객체 속성
    >length 문자열의 길이를 나타냅니다.
  - String 객체의 메소드
-   >charAt(position) position에 위치한 문자를 리턴합니다.
-   charCodeAt(position) position에 위치한 문자의 유니코드 번호를 리턴합니다.
+   >charAt(position) position에 위치한 문자를 리턴합니다.<br>
+   charCodeAt(position) position에 위치한 문자의 유니코드 번호를 리턴합니다.<br>
    concat(args) 매개 변수로 입력한 문자열을 이어 리턴합니다.
    ...
 
 ##### String 메소드 활용
  - 문자열 포함, 문자열 분해 등에 사용
  - indexOf()메소드
-   > let string = '안녕하세요.'
+   > let string = '안녕하세요.';<br>
    if (string.indexof('아침')>=0){console.log('좋은 아침이에요.')}
  - 결과
    > 좋은 아침이에요.
  - split()메소드
-   > let string = '감자,고구마,바나나,사과';
-   let array = string.split(',');
+   > let string = '감자,고구마,바나나,사과';<br>
+   let array = string.split(',');<br>
    console.log(array);
  - 결과
    > [ '감자','고구마','바나나','사과' ]
