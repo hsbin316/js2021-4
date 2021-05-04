@@ -1,4 +1,84 @@
 # 허성빈 [201840235]
+## [04월 06일]
+> 오늘 배운 내용 요약
+##### 생성자 함수
+ - 생성자 함수는 일반적인 함수와 구분할 수 있게 대문자로 시작하는 이름을 사용한다.
+ - 생성자 함수 ex)
+   > function Product(name,price) {
+this.name=name;
+this.price=price;
+}
+ - 객체 생성 ex)
+   > let product = new Product("바나나",1200);
+
+##### 프로토타입
+ - 생성자 함수로 만든 객체는 프로토타입이라는 공간에 메소드를 지정해서 모든 객체가 공유하도록 만들 수 있다.
+ - [ 교재 171페이지 참고 ]
+
+##### null
+ - 값 = null , 자료형 = object
+ - 변수 선언하고 값을 넣지않으면 undefined가 된다.
+ - 값이 없는 상태를 구분할 때 사용한다.
+ - [ 교재 173페이지 참고]
+
+##### 기본 자료형과 객체 자료형의 차이
+ - 숫자,문자열,불을 기본 자료형이라고 한다.
+ - typeof를 사용면object 문자가 출력된다.
+ - 기본 자료형과 객체의 차이점을 찾기 어렵다.
+ - 굳이 찾으면 기본 자료형은 객체가 아니므로 속성과 메소드를 추가할 수 없다는 차이점이 있다.
+ - [ 교재 182 - 183 페이지 참고 ]
+
+##### Number객체
+ - Number객체 생성 ex)
+   > let numberFromLiteral = 273;
+   let numberFromConstrctor = new Number(273);
+
+##### Number메소드
+ - Number 객체의 메소드
+   > toExponential() 숫자를 자수 표시로 나타낸 문자열을 리턴합니다.
+   toFixed() 숫자를 고정소수점 표시로 나타낸 문자열을 리턴합니다.
+   toPrecision() 숫자를 길이에 따라 자수 표시 또는 고정소수점 표시로 나타낸 문자열을 리턴합니다.
+
+##### 생성자 함수의 속성
+ - 객체의 일종이므로 속성과 메소드를 추가할 수 있다.
+ - Number 생성자 함수의 속성
+   > MAX_VALUE 자바스크립트의 숫자가 나타낼 수 있는 최대 숫자
+   MIN_VALUE 자바스크립트의 숫자가 나타낼 수 있는 최소 숫자
+   NaN 자바스크립트의 숫자로 나타낼 수 없는 숫자
+   POSITIVE_INFINITY 양의 무한대 숫자
+   NEGATIVE_INFINITY 음의 무한대 숫자
+
+##### String 객체
+ - 자바스크립트에서 가장 많이 사용하는 내장 객체
+ - String 객체 생성 ex)
+   >let stingFromLiteral='안녕하세요';
+   let stringFromConstructor=new String('안녕하세요');
+
+##### String 속성과 메소드
+ - String 객체 속성
+   >length 문자열의 길이를 나타냅니다.
+ - String 객체의 메소드
+   >charAt(position) position에 위치한 문자를 리턴합니다.
+   charCodeAt(position) position에 위치한 문자의 유니코드 번호를 리턴합니다.
+   concat(args) 매개 변수로 입력한 문자열을 이어 리턴합니다.
+   ...
+
+##### String 메소드 활용
+ - 문자열 포함, 문자열 분해 등에 사용
+ - indexOf()메소드
+   > let string = '안녕하세요.'
+   if (string.indexof('아침')>=0){console.log('좋은 아침이에요.')}
+ - 결과
+   > 좋은 아침이에요.
+ - split()메소드
+   > let string = '감자,고구마,바나나,사과';
+   let array = string.split(',');
+   console.log(array);
+ - 결과
+   > [ '감자','고구마','바나나','사과' ]
+
+ - [ 교재 190 - 191 페이지 참고 ]
+
 ## [04월 27일]
 > 오늘 배운 내용 요약
 ##### 타이머함수
