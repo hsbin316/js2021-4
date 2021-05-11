@@ -1,4 +1,127 @@
 # 허성빈 [201840235]
+## [05월 11일]
+> 오늘 배운 내용 요약
+##### Date 객체
+ - Date 객체 생성 방법
+     > new Date() 현재 시간으로 Date 객체를 생성<br>
+     new Date(<유닉스 타임>) 유닉스 타임으로 Date 객체를 생성<br>
+     new Date(<시간 문자열>) 문자열로 Date 객체를 생성<br>
+     new Date(<년>,<월-1>,<일>,<시간>,<분>,<초>,<밀리초>) 시간 요소를 기반으로 Date 객체를 생성
+
+##### Date 메소드 활용
+ - Date 객체는 get ㅇㅇ() 형태와 set ㅇㅇ() 형태의 메소드만 가진다
+ - ㅇㅇ에 들어갈 수 있는 문자는 FullYear,Month,Day,Hours,Seconds 등 이다.
+ - ex) 시간 더하기
+     > let date = new Date();<br>
+     console.log(date);<br>
+     date.setFullYear(date.getFullYear()+1);<br>
+     date.setMonth(date.getMonth()+11);<br>
+     date.setDate(date.getDate()+3);<br>
+     console.log(date);
+ - 출력 (2016년 8월 16일 기준)
+     > 2016-08-15T21:57:04.200Z<br>
+     2018-07-18T21:57:04.200Z
+ - [ 교재 193 - 194 페이지 참고 ]
+
+##### Array 객체
+ - Array 객체는 자바스크립트에서 여러 자료를 다룰 때 사용하는 자료형
+ - Array 객체의 메소드
+     > concat() 매개 변수로 입력한 배열의 요소를 모두 합쳐 배열을 만들어 리턴<br>
+     join() 배열 안의 모든 요소를 문자열로 만들어 리턴<br>
+     pop()* 배열의 마지막 요소를 제거하고 리턴<br>
+     push()* 배열의 마지막 부분에 새로운 요소를 추가<br>
+     reverse()* 배열의 요소 순서를 뒤집는다<br>
+     slice() 배열 요소의 지정한 부분을 리턴<br>
+     sort()* 배열의 요소를 정렬<br>
+     splice()* 배열 요소의 지정한 부분을 삭제하고 삭제한 요소를 리턴
+ - [ 교재 195 - 198 페이지 참고 ]
+
+##### ECMAScript5에서 추가된 메소드
+ - ECMAScript에서 추가된 Array 객체의 메소드 (사용 빈도가 높은 메소드 3개)
+     > forEach() 배열의 요소를 하나씩 뽑아 반복<br>
+     map() 콜백 함수에서 리턴하는 것을 기반으로 새로운 배열을 만듬<br>
+     filter() 콜백함수의 true를 리턴하는 것만으로만 새로운 배열을 만들어 리턴
+ - 콜백 함수 형태 ex)
+     >let foo = [1, 30, 40, 50, 100];<br> 
+     foo.forEach((item,index) => { 출력 });<br>
+     let bar=foo.map((item,index) => { 리턴 });<br>
+     let foobar = foo.filter((item, index) => { 조건 });
+
+##### 프로토타입에 메소드 추가
+ - 메소드를 추가하면 해당 자료형 전체에 추가할 수 있다.
+ - ex)
+     > String.prototype.contain = function(input){<br>
+         return this.indexOf(input) >= -1; <br>
+     };<br>
+     console.log('안녕하세요'.contain('안녕'));<br>
+     console.log('안녕하세요'.contain('데굴데굴'));
+ - 익명 함수와 호살표 함수의 차이 때문에 화살표 함수는 사용할 수 없다.
+
+##### underscore.js 라이브러리
+ - 자바스크립트에서 굉장히 많은 기본 함수를 제공함에도 실제로 사용하다 보면 부족
+ - 개발자가 자주 사용하는 기능을 underscore.js 라이브러리에 정리
+ - 자세한 내용은 공식 웹 사이트를 살펴보면 쉽게 이해 가능
+ - [ 교재 201 - 202 페이지 참고 ]
+
+##### JSON 객체
+ - ECMAScript5에서 추가된 객체 
+ - JSON은 JavaScript Object Notation의 약어
+ - 자바스크립트 객체를 사용한 데이터 표현 방법
+ - 2010년 이후 전 세계 웹에서 가장 많이 사용하는 데이터 표현 방법
+ - 제약 사항
+     > 문자열은 큰따옴표로 만들어야 한다.<br>
+     모든 키는 따옴표로 감싸야 한다.<br>
+     숫자,문자열,불 자료형만 사용할 수 있다.
+ - JSON 객체의 메소드
+     > JSON.string(<객체>,<변환함수>,<공백개수>) 자바스크립트 객체를 문자로 만듬<br>
+     JSON.parse(<문자열>) 문자열을 자바스크립트 객체로 파싱
+ - [ 교제 204 페이지 예제참고 ]
+
+##### 예외와 기본 예외 처리
+ - 오류 : 프로그램을 실행하기도 전에 발생하는 문법적 오류 [ 교재 212 페이지 NOTE 참고 ]
+ - 예외 : 실행에 문제가 발생하면 자동 중단됨. 이렇게 발생한 오류
+ - 예외 처리 : 오류에 대처할 수 있게 하는 것
+ - 예외 상황 확인 [ 교제 213 페이지 예제참고 ]
+
+##### 고급 예외 처리
+ - try, catch, finally 키워드로 예외를 처리
+ - 기본 형태
+     > try { <br>
+         예외 발생하면 <br>
+     } catch(exception) {<br>
+         여기서 처리<br>
+     } finally {<br>
+         무조건 처리<Br>
+     }
+ - try, catch, finally 구문 ex)
+     > try { <br>
+         const array = new Array(-2000); <br>
+     } catch(exception) {<br>
+         console.log('${exception.name} 예외가 발생했습니다.')<br>
+     } finally {<br>
+         console.log('finally 구문이 실행되었습니다.')<Br>
+     } 
+ - 출력
+     > RangeError 예외가 발생했습니다.<br>
+     finally 구문이 실행되었습니다.
+ - [ 교재 216 - 218 페이지 참고 ]
+
+##### 예외 객체
+ - 예외가 발생하면 어떤 예외가 발생했는지 정보를 함께 전달받는 기능을 수행
+ - 형태
+     > try {<br>
+     } catch(exception) {<br>
+     }
+ - exception을 입력할 필요없이 e를 써서 사용가능
+
+##### 강제 예외
+ - 예외를 강제로 발생시킬 때 throw키워드를 사용
+ - throw 키워드 뒤에 문자열 또는 Error 객체를 입력
+     > throw '강제 예외';
+ - 더 자세하게 예외를 출력하고 싶을 때 Error객체를 사용
+ - Error 객체를 사용하면 어떤 파일의 몇 번째 줄에서 예외가 발생했는지 확인 가능
+ - 예외 처리 예제 [ 교제 220 - 221 페이지 참고 ]
+
 ## [05월 04일]
 > 오늘 배운 내용 요약
 ##### 생성자 함수
