@@ -1,4 +1,159 @@
 # 허성빈 [201840235]
+## [05월 19일]
+> 오늘 배운 내용 요약
+##### 전역변수
+ - 아무런 변수를 선언하지 않고 모든 곳에서 사용할 수 있는 변수
+ - 문자열 자료형의 전역 변수
+     > __filename 현재 실행 중인 코드의 파일 경로를 나타낸다<br>
+     __dirname 현재 실행 중인 코드의 폴더 경로를 나타낸다
+ - ex)
+     > console.log(__filename);<br>
+     console.log(__dirname);
+ - 결과
+     > node globalVarialbe.js<br>
+     globalVariable.js
+
+##### process 객체의 속성과 이벤트
+ - process 객체는 프로세스 정보를 제공하며, 제어할 수 있게 하는 객체
+ - process 객체의 속성
+     > env 컴퓨터 환경 정보를 나타낸다<br>
+     version Node.js버전을 나타낸다<br>
+     versions Node.js의 종속된 프로그램 버전을 나타낸다<br>
+     arch 프로세서의 아키텍처를 나타낸다<br>
+     platform 플랫폼을 나타낸다
+ - process 객체의 메소드
+     > exit([exitCode=0]) 프로그램을 종료<br>
+     memoryUsage() 메모리 사용 정보 객체를 리턴<br>
+     uptimem() 현재 프로그램이 실행된 시간을 리턴
+
+##### process 객체오 이번트 개용
+ - Node.js의 이벤트 연결 메소드
+     > on(<이벤트 이름>,<이벤트 핸들러>) 이벤트를 연결
+ - 이벤트 핸들러는 이벤트가 발생했을 때 호출할 함수를 의미
+ - process 객체의 이벤트
+     > exit 프로세스가 종료될 때 발생<br>
+     uncaughtException 예외가 일어날 때 발생
+ - [교재 233 페이지 참고]
+
+##### os모듈
+ - os모듈은 애플리케이션을 마들 때 많이 활용하지 않는다
+ - 모듈의 기본 사용 방법을 익히기에 가장 적당
+ - os객체 생성
+     > const os = require('os');
+ - os모듈의 메소드
+     > hostname() 운영체제의 호스트이름을 리턴<br>
+     type() 운영체제의 이름을 리턴<br>
+     platform() 운영체제의 플랫폼을 리턴<br>
+     arch() 운영체제의 아키텍처를 리턴<br>
+     release() 운영체제의 버전을 리턴<br>
+     uptime() 운영체제가 실행된 시간을 리턴<br>
+     loadavg() 로드 에버러지 정보를 담은 배열을 리턴<br>
+     totalmem() 시스템의 총메모리를 리턴<br>
+     freemem() 시스템의 사용 가능한 메모리를 리턴<br>
+     cpus() CPU의 정보를 담은 객체를 리턴<br>
+     getNetworkInterfaces() 네트워크 인터페이스의 정보를 담은 배열을리턴
+
+##### url모듈
+ - url객체 생성
+     > const url = require('url');
+ - url모듈의 메소드
+     > parse(urlStr[, parseQueryString=false,slashesDenoteHost=false]) url문자열을 url객체로 변환해 리턴<br>
+     format(urlObj) url객체를 url문자열로 변환해 리턴<br>
+     resolve(from,to) 매개 변수를 조합하여 완전한 url 문자열을 생성해 리턴
+
+##### File System모듈(자주사용)
+ - 파일 처리와 관련된 모듈
+ - fs객체 생성
+     > const fs = require('fs');
+ - 파일 읽기 메소드
+     > fs.readFileSync(<파일 이름>); 동기적으로 파일을 읽어 들인다<br>
+     fs.readFile(<파일 이름>,<콜백 함수>); 비동기적으로 파일을 읽어 들인다
+ - 동기식 비동기식 실행 예제 [ 교재 240-241 페이지 참고]
+ - 동기식 코드 예제
+     > const fs = require('fs'); ① <br>
+     const file = fs.readFileSync('testfile.txt'); ② <br>
+     cosole.log(file); ③ <br>
+     console.log(file.toString); ④ <br>
+     // 현재 단계의 코드를 종료 ⑤
+ - 동기적으로 파일을 읽어 들일 때 중요한 부분은 ②에서③으로 이동하는 과정이다
+ - ②에서 파일을 읽어 들일 때까지 코드가 정지
+ - 파일크기가 클 경우 ②에서③으로 이동할 때 10초 이상 정지할 가능성이 있다
+ - 10초이상 정지할 경우 사용자가 프로그램이 죽었나 하고 생각하여  프로그램을 강제 종료할 가능성이 있다.
+ - 비동기식 코드 예제
+     > const fs = require('fs'); ① <br>
+     fs.readFile('textfile.txt',(error,file) => { ② <br>
+        console.log(file); ④ <br>
+        console.log(file.toString()); ⑤ <br>
+        //현재 단계의 코드를 종료합니다. ⑥ <br>
+     });<br>
+     //현재 단계의 코드를 종료합니다. ③ <br>
+ - fs.readFile() 메소드는 파일을 읽어 들이는 이벤트를 등록하는 메소드
+ - ②에서③으로 이동하는 동안 걸리는 시간이 0초에 가깝다
+ - 프로그램이 계속 실행되며 뒷단에서 파일을 읽어 들이는 처리가 수행
+
+##### 비동기 처리의 장점
+ - 프로그램을 개발하는 과정에서 Node.js를 사용하면 손쉽게 비동기 처리 구현
+ - 순차적으로 읽어 들이는 것이 아니라 병렬적으로 파일을 읽어 들이므로, 파일 하나를 읽어 들이는데 2초씩 걸린다 해도 전체 처리가  2초 밖에 되지 않는다
+
+##### 파일쓰기
+ - 파일 쓰기 메소드
+     > fs.writeFileSync(<파일 이름>,<문자열>) 동기적으로 파일을 쓴다 <br>
+     fs.writeFile(<파일 이름>,<문자열>,<콜백함수>) 비동기적으로 파일을 쓴다
+ - 예제 [ 교재 245 페이지 참고 ]
+
+##### 파일 처리와 예외 처리
+ - 동기 코드를 예외 처리할 때 try catch 구문을 활용
+ - 비동기 코드를 예외 처리할 때는 콜백 함수로 전달된 첫 번째 매개 변수 error를 활용
+ - Node.js에서는 동기 처리를 사용할 이유가 없다
+ - 동기 코드 예외 처리, 비동기 코드 예외 처리 예제 [ 교재 246-248페이지 참고 ]
+
+##### 노드 패키지 매니저
+ - 어떤 프로그래밍 플랫폼이 기본적으로 제공하는 모듈을'내부 모듈'이라고 한다
+ - 개인 개발자가 내부 모듈을 조합해서 사용하기 쉬운 형태로 만들거나 새로운 기능을 구현해서 제공하는 것을'외부 모듈'이라고 한다
+ - npm(Node.js Package Manager)
+ - npm 외부 모듈 설치 명령어
+     > npm install<모듈 이름> <br>
+     예> npm install express
+ - 명령어 뒤에 @기호를 사용하면 원하는 버전을 설치할 수 있다
+     > npm install <모듈 이름>@<버전> <br>
+     예> npm install express@4.2
+
+##### request모듈
+ - 웹 요청을 쉽게 만들어 주는 모듈
+ - Node.js가 기본적으로 제공하는 모듈이 아니라 다른 개인이 제공하는'외부 모듈'이다
+ - npm으로 설치해야 사용 가능
+     > npm install request
+ - request 모듈 추출
+     > const request = require('request');
+ - request모듈 설명 [ GitHub페이지에서 확인 가능 ]
+ - request 예제
+     > const request = require('request'); <br>
+     request('https://naver.com',(error,response,body) => { <br>
+         console.log(body); <br>
+     })
+ - 결과
+     > a href="https://blog.naver.com/bizzy78/222251306146" class="theme_info" data-clk="tcc_des.list5.....<br> 등 사이트 body부문 출력
+
+##### cheerio모듈
+ - 웹 페이지의 측정 위치에서 손쉽게 데이터를 추출할 수 있다
+ - cheerio 모듈 설치
+     > npm install cheerio
+ - cheerio 모듈 추출
+     > const cheerio = require('cheerio');
+ - cheerio모듈은 jQuery를 어느 정도 알아야 제대로 활용 가능
+ - 예제 [ 교과서 255 페이지 참고 ]
+
+##### async 모듈
+ - 비동기적으로 구성되므로 실행 순서를 정의하기가 어렵고, 들여쓰기도 많다. 이 문제를 어느 정도 해결해 줄 수 있는 모듈
+ - async 모듈 설치
+     > npm install async
+ - async 모듈 추출
+     > const async = require('async');
+ - async 모듈 설명 [ GitHub페이지에서 확인 가능 ]
+ - 비동기 처리를 많이 하면 '콜백 지옥'이 발생
+ - '콜백 지옥'은 콜백 함수를 여러 개 들여쓰기 하여 코드를 보기 힘든 상태를 의미
+ - async 예제 [ 교제 257 페이지 참고 ]
+
 ## [05월 11일]
 > 오늘 배운 내용 요약
 ##### Date 객체
