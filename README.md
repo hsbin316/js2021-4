@@ -1,5 +1,202 @@
 # 허성빈 [201840235]
-## [05월 19일]
+## [05월 25일]
+> 오늘 배운 내용 요약
+##### 요청과 응답
+ - express 모듈 설치 명령어
+     > $ npm install express@4
+ - 웹 서버가 하는 일은 요청과 응답의 연속이라고 정의할 수 있다.
+  - 예를 들어 웹 브라우저에 네이버 웹 페이지 주소를 입력하면 웹 페이지를 제공하라는 웹 브라우저의 요청을 받은 웹 서버는 요청을 받아들여 웹 페이지를 전송한다.
+     > 사용자 → 요청 → 서버 → 응답 → 사용자
+ - 요청 메시지 : 클라이언트가 서버로 보내는 편지
+ - 응답 메시지 : 서버가 클라이언트로 보내는 편지
+
+##### express 모듈을 사용한 서버 생성과 실행
+ - express모듈의 기본 메소드
+     > express() : 서버 애플리케이션 객체를 생성한다<br>
+     app.use() : 요청이 왔을 때 실행할 함수를 지정한다<br>
+     app.listen() : 서버를 실행한다
+ - 예제)
+     > // 모듈을 추출한다. <br>
+     const express = require('express')<br>
+     // 서버를 생성한다. <br>
+     const app = express(); <br>
+     // request 이벤트 리스너를 설정한다. <br>
+     app.user((request, response)=> {response.send('hello express'));}) <br>
+     // 서버를 실행한다. <br>
+     app.listen(52273, () => {console.log('Server running at http:// 127.0.0.1:52273');});
+ - 결과
+     > Server running at http:// 127.0.0.1:52273
+ - 웹 페이지 결과
+     > hello express
+
+##### 페이지 라우팅
+ - 클라이언트 요청에 적절한 페이지를 제공하는 기술
+ - express 모듈의 페이지 라우팅 메소드
+     > get(path,callback) : GET 요청이 발생했을 때 이벤트 리스너를 지정 <br>
+     post(path,callback) : POST 요청이 발생했을 때 이벤트 리스너를 지정 <br>
+     put(path,callback) : PUT 요청이 발생했을 때 이벤트 리스너를 지정 <br>
+     delete(path,callback) : DELETE 요청이 발생했을 때 이벤트 리스너를 지정 <br>
+     all(path,callback) : 모든 요청이 발생했을 때 이벤트 리스너를 지정
+ - 예제
+     > // 모듈을 추출한다. <br>
+     const express = require('express'); <br>
+     // 서버를 생성한다. <br>
+     const app = express(); <br>
+     // request 이벤트 리스너를 설정한다. <br>
+     app.get('/page/:id',(request,response) => { <br>
+     &nbsp; // 토큰을 꺼낸다. <br>
+     &nbsp; const id = request.params.id; <br>
+     &nbsp; // 응답한다. <br>
+     &nbsp; response.send(`${id}Page');}); <br>
+     // 서버를 실행한다. <br>
+     app.listen(52273, () => {console.log('Server running at http:// 127.0.0.1:52273');});
+ - 웹 페이지 결과
+     > 273 Page
+
+##### 요청과 응답
+ - express 모듈에서 사용하는 모든 콜백 함수의 매개 변수에는 request 객체와 response 객체가 들어간다.
+ - response 객체의 기본 메소드
+     > send() : 데이터 본문을 제공한다 <br>
+     status() : 상태 코드를 제공한다 <br>
+     set() : 헤더를 설정한다
+ - 예제
+     > // 모듈을 추출한다. <br>
+     const express = require('express'); <br>
+     // 서버를 생성한다. <br>
+     const app = express(); <br>
+     // request 이벤트 리스너를 설정한다. <br>
+     app.get('*',(request,response) => { <br>
+     &nbsp; response.status(404); <br>
+     &nbsp; response.set('methodA','ABCDE'); <br>
+     &nbsp; response.set({ <br>
+     &nbsp; &nbsp; 'methodB1':'FGHIJ', <br>
+     &nbsp; &nbsp; 'methodB2':'KLMNO' <br>
+     &nbsp; }); <br>
+     &nbsp; response.send('본문을 입력합니다.'); <br>
+     }) <br>
+     // 서버를 실행한다. <br>
+     app.listen(52273, () => {console.log('Server running at http:// 127.0.0.1:52273');});
+ - 웹 페이지 결과
+     > 본문을 입력합니다.
+ - <B>Content-Type</B>
+    - MIME 형식
+        > text/plain 기본적인 텍스트를 의미 <br>
+     text/html html 데이터를 의미 <br>
+     image/png png 데이터를 의미 <br>
+     audio/mpe MP3 음악 파일을 의미 <br>
+     video/mpeg MPEG 비디오 파일을 의미 <br>
+     application/json json 데이터를 의미 <br>
+     multipart/form-data 입력 양식 데이터를 의미
+    - Content-Type 지정 메소드
+        > Content-Type을 MIME 형식으로 지정
+    - 예제 [ 교제 275-276페이지 참고 
+ - <B>HTTP 상태 코드</B>
+    - HTTP 상태 코드의 예
+        > 1xx &nbsp; 처리중 &nbsp; 100 Continue <br>
+     2xx &nbsp; 성공 &nbsp; 200 OK <br>
+     3xx &nbsp; 리다이렉트 &nbsp; 300 MUltiple Choices <br>
+     4xx &nbsp; 클라이언트 오류 &nbsp; 400 Bad Request <br>
+     5xx &nbsp; 서버 오류 &nbsp; 500 Internal Server Error
+    - status()메소드
+        > status() 상태 코드를 지정한다.
+    - 예제 [ 교제 278 페이지 참고 ]
+ - <B>리다이렉트</B>
+    - 웹 브라우저가 리다이렉트를 확인하면 화면을 출ㄹ력하지 않고, 응답 헤더에 있는 Location 속성을 확인해서 해당 위치로 이동
+    - redirect() 메소드
+        > redirect() 리다이렉트합니다.
+    - 예제
+        > // 모듈을 추출한다. <br>
+     const express = require('express'); <br>
+     // 서버를 생성한다. <br>
+     const app = express(); <br>
+     // request 이벤트 리스너를 설정한다. <br>
+     app.get('*',(request,respone) => { <br>
+     &nbsp; response.redirect('http:// hanbit.co.k r'); <br>
+     }); <br>
+     // 서버를 실행한다. <br>
+     app.listen(52273,() => {console.log('Server running at http:// 127.0.0.1:52273');)};
+
+##### request 객체
+ - 요청 매개 변수
+ - 주소 분석
+     > 프로토콜 &nbsp;&nbsp; 통신에 사용되는 규칙을 의미한다. <br>
+     호스트 &nbsp;&nbsp; 애플리케이션 서버의 위치를 의미 <br>
+     URL &nbsp;&nbsp; 애플리케이션 서버 내부에서 라우트 위치를 나타낸다 <br>
+     요청 매개 변수 &nbsp;&nbsp; 추가적인 정보를 의미
+ - 예제
+     > // 모듈을 추출한다. <br>
+     const express = require('express'); <br>
+     // 서버를 생성한다. <br>
+     const app = express(); <br>
+     // request 이벤트를 리스너를 설정 <br>
+     app.get('*',(request,response) =>{ <br>
+     &nbsp; console.log(request.query); <br>
+     &nbsp; response.send(request.query); <br>
+     }); <br>
+     //서버를 실행한다. <br>
+     app.listen(52273, () => {console.log('Server runinng at http:// 127.0.0.1:52273);});
+ - 결과
+     > Server runinng at http:// 127.0.0.1:52273 <br>
+     { a: '10, b: '20'}
+
+##### 미들웨어
+ - 쉽게 활용할 수 있도록 여러 가지 기능을 제공한다.
+ - 미들웨어 설정 메소드
+     > use() 미들웨어를 설정한다.
+ - <B>정적 파일 제공</B>
+    - 웹 페이지에서 변경되지 않는 요소를 쉽게 제공해주는 기능
+    - 변경되지 않는 요소 (이미지,음악,자바스크립트 파일, 스타일시트 파일 등)
+    - 예제 [ 교제 283 페이지 참고 ]
+ - <B>morgan 미들웨어</B>
+    - moragn 미들웨어 설치
+        > npm install morgan
+    - 예제 [ 교제 284-285 페이지 참고 ]
+    - 웹 서버에서 굊아히 기본적이면서도 중요한 미들웨어
+ - <B>body-parser 미들웨어</B>
+    - 클라이언트에서 서버로 데이터 전송
+    - URL을 사용한 요청
+    - 클라이언트가 서버로 본문을 전달할 때 요청 본문의 종류를 함께 전달
+    - 요청 본문의 종류
+        > application/x-www-form-urlencoded : 웹브라우저에서 입력 양식을 POST,PUT,DELETE 방식 등으로 전달 할 때 사용하느 기본적이 요청 형식 <br>
+        application/json JSON : 데이터로 요청하는 방식 <br>
+        multipart/form-data : 대용량 파일을 전송할 때 사용하는 요청 방식 <br>
+    - body-parser 미들웨어 설치
+        > npm install body-parser
+    - 예제 [ 교제 287 페이지 참고 ]
+ - 속성 정리
+    > params 객체 : URL의 토큰을 나타낸다. <br>
+    query 객체 : URL의 요청 매개 변수를 나타낸다. 토큰보다 많은 데이터를 전달할 수 있으며, 주소로 어떤 데이터가 오고 가는지 확인할 수 있다. <br>
+    body 객체 : 대용량 문자열 등을 전송할 때 사용한다. 다만 주소에 데이터를 기록하지 못하므로 새로고치이나 즐겨찾기 기능 등을 활용할 수 없다.
+
+##### RESTful 웹 서비스 개요
+ - REST규정에 맞게 만든 ROA를 따르는 웹 서비스 디자인 표준
+ - 자원을 다루는 방법과 특정 웹 페이지로 접근하는 방법을 비슷한 형태로 구성한다는 의미
+ - RESTful 웹 서비스의 구조
+     > GET &nbsp;&nbsp; 컬렉션을 조회한다 &nbsp;&nbsp; 컬렉션의 특정 요소를 조회한다 <br>
+     POST &nbsp;&nbsp; 컬렉션에 새로운 데이터를 추가한다 &nbsp;&nbsp; 요소를 사용하지 않는다 <br>
+     PUT &nbsp;&nbsp; 컬렉션 전체를 한꺼번에 변경한다 &nbsp;&nbsp; 컬렉션에 특정 요소를 수정한다 <br>
+     DELETE &nbsp;&nbsp; 컬렉션 전체를 삭제한다 &nbsp;&nbsp; 컬렉션의 특정 요소를 삭제한다.
+ - ex)
+     > GET/user : 사용자 전체를 조회한다 <br>
+     GET/user/273 : 273번 사용자를 조회한다 <br>
+     POST/user : 사용자를 추가한다 <br>
+     DELETE/user/273 : 273번 사용자를 삭제한다
+ - RESTful 웹 서비스
+     > GET &nbsp;&nbsp; /user &nbsp;&nbsp; 모든 사용자 정보를 조회 <br>
+     POST &nbsp;&nbsp; /user &nbsp;&nbsp; 사용자를 추가 <br>
+     GET &nbsp;&nbsp; /user/:id &nbsp;&nbsp; 특정 사용자 정보를 조회 <br>
+     PUT &nbsp;&nbsp; /user/:id &nbsp;&nbsp; 특정 사용자 정보를 수정 <br>
+     DELETE &nbsp;&nbsp; /user/:id &nbsp;&nbsp; 특정 사용자 정보를 제거
+
+##### 코드 구성
+ - RESTful 웹 서비스 코드 [ 교제 295-298 페이지 참고 ]
+
+##### Postman 크롬 애플리케이션
+ - Postman 설치
+     > https://www.getpostman.com/
+ - RESTful 웹 서비스를 테스트할 수 있도록하는 애플리케이션
+
+## [05월 18일]
 > 오늘 배운 내용 요약
 ##### 전역변수
  - 아무런 변수를 선언하지 않고 모든 곳에서 사용할 수 있는 변수
